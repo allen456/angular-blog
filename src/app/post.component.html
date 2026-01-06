@@ -1,0 +1,27 @@
+@if (post$ | async; as post) {
+  <div>
+    @if (post.Image) {
+      <img [src]="post.Image" [alt]="post.Title" (error)="img.style.display='none'" #img style="width:100%;max-height:400px;object-fit:cover;border-radius:0.5rem;margin-bottom:1rem">
+    }
+    <div style="margin-bottom:1rem">
+      @if (post.Category) {
+        <span style="background:#e6eef6;color:#0056b3;padding:0.25rem 0.5rem;border-radius:0.25rem;font-size:0.875rem;margin-right:0.5rem">{{ post.Category }}</span>
+      }
+      @if (post.Feature) {
+        <span style="background:#fef3c7;color:#92400e;padding:0.25rem 0.5rem;border-radius:0.25rem;font-size:0.875rem">Featured</span>
+      }
+    </div>
+    <h1>{{ post.Title }}</h1>
+    @if (post.Subtitle) {
+      <p style="font-size:1.25rem;color:#4b5563;margin-top:0">{{ post.Subtitle }}</p>
+    }
+    @if (post.BlogDate) {
+      <p style="color:#6b7280">{{ post.BlogDate }}</p>
+    }
+    @if (post.Content) {
+      <div [innerHTML]="post.Content"></div>
+    } @else {
+      <pre>{{ post | json }}</pre>
+    }
+  </div>
+}
